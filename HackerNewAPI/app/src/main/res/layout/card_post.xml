@@ -1,0 +1,140 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/lib/net.pmsv.diadiemcaobang"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/dia_diem_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/card_margin"
+        android:elevation="3dp"
+        card_view:cardCornerRadius="@dimen/card_album_radius">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:weightSum="10">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:orientation="vertical"
+                android:background="#e6e4e4"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/text_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/size_text_sub_title"
+                    android:textColor="#000"/>
+
+                <TextView
+                    android:id="@+id/text_score"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="+150"
+                    android:textAlignment="center"
+                    android:textSize="10sp"
+                    android:alpha="0.5"
+                    android:textColor="#000"/>
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="8.5"
+                android:paddingLeft="5dp">
+
+                <TextView
+                    android:id="@+id/text_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Title"
+                    android:textColor="#000"
+                    android:textSize="@dimen/size_text_title"
+                    android:textStyle="bold" />
+
+                <RelativeLayout
+                    android:id="@+id/layout_belowtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_title"
+                    android:orientation="vertical"
+                    android:weightSum="10">
+
+                    <TextView
+                        android:id="@+id/text_post_by_url"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.5"
+                        android:text="Post by url"
+                        android:textColor="#000"
+                        android:textSize="@dimen/size_text_sub_title" />
+
+                    <TextView
+                        android:id="@+id/text_datetime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.5"
+                        android:text="Datetime"
+                        android:textColor="#000"
+                        android:textSize="@dimen/size_text_sub_title"
+                        android:layout_below="@id/text_post_by_url"/>
+
+                    <TextView
+                        android:id="@+id/space"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/text_datetime"
+                        android:layout_below="@id/text_post_by_url"
+                        android:text=" - " />
+
+                    <TextView
+                        android:id="@+id/text_author"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.5"
+                        android:text="Author"
+                        android:textColor="#000"
+                        android:textSize="@dimen/size_text_sub_title"
+                        android:layout_below="@id/text_post_by_url"
+                        android:layout_toRightOf="@id/space"/>
+
+
+                    <ImageView
+                        android:id="@+id/image_icon_comment"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/icon_comment"
+                        android:layout_below="@id/text_post_by_url"
+                        android:layout_toLeftOf="@+id/text_number_comment"/>
+
+                    <TextView
+                        android:id="@+id/text_number_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/text_post_by_url"
+                        android:text="123"
+                        android:textSize="@dimen/size_text_sub_title"
+                        android:layout_alignParentRight="true"
+                        android:paddingTop="2px"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
