@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.dmspro.trieungo.hackernewapi.Adapter.AdapterPost;
 import com.dmspro.trieungo.hackernewapi.DTO.Post;
@@ -28,12 +31,16 @@ public class MainActivity extends AppCompatActivity {
     public RecyclerView recyclerView;
     public AdapterPost adapterPost;
 
+    public Button testbtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         initView();
+
+        readJSONByIdPost readjsonbyidpost = new readJSONByIdPost();
 
         runOnUiThread(new Runnable() {
             @Override
@@ -42,6 +49,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        testbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapterPost = new AdapterPost(MainActivity.this, mListPosts);
+                Toast.makeText(getApplicationContext(), "size ar: " + mListPosts.size() + " -- size adapter: " + adapterPost.getItemCount() , Toast.LENGTH_SHORT).show();
+                recyclerView.setAdapter(adapterPost);
+            }
+        });
 
 
     }
@@ -50,9 +65,10 @@ public class MainActivity extends AppCompatActivity {
         listIdOf500Stories = new ArrayList();
         mListPosts = new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_home);
+        testbtn = (Button) findViewById(R.id.testbtn);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
     }
 
@@ -65,18 +81,18 @@ public class MainActivity extends AppCompatActivity {
                 JSONArray itemArray = new JSONArray(chuoi);
                 Log.d("jsonasd ", String.valueOf(itemArray.length()));
 
-                for (int i = 0; i < 30; i++) {
+                for (int i = 0; i < 31; i++) {
                     int value = itemArray.getInt(i);
                     listIdOf500Stories.add(value);
 
                     getJSONByID(value);
 
                     Log.d("json500ID ", i + " = " + value);
-
                 }
 
             } catch (JSONException e) {
                 e.printStackTrace();
+
             }
 
             return chuoi;
@@ -85,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Log.d("checklast ", "da hoan thanh");
         }
 
     }
@@ -104,16 +119,9 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            String post = getXMLFromURL(params[0]);
-            return post;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-
+            String postJSON = getXMLFromURL(params[0]);
             try {
-                JSONObject root = new JSONObject(s);
+                JSONObject root = new JSONObject(postJSON);
 
                 String id = root.getString("id");
                 String title = root.getString("title");
@@ -124,12 +132,8 @@ public class MainActivity extends AppCompatActivity {
                 String descendants = root.getString("descendants");
                 String score = root.getString("score");
 
-
                 Post post = new Post( id,  title,  author,  score,  time,  type,  url,  descendants);
                 mListPosts.add(post);
-
-                adapterPost = new AdapterPost(getApplicationContext(), mListPosts);
-                recyclerView.setAdapter(adapterPost);
 
                 Log.d("Title : ",  id + " -- " + title + " -- " + author  + " -- "
                         + time + " -- " + type + " -- " + url + " -- " + descendants);
@@ -138,6 +142,16 @@ public class MainActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
+            return postJSON;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            adapterPost = new AdapterPost(MainActivity.this, mListPosts);
+            recyclerView.setAdapter(adapterPost);
 
         }
     }

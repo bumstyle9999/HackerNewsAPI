@@ -62,7 +62,7 @@ public class AdapterPost extends  RecyclerView.Adapter<AdapterPost.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Post postDTO = mListPost.get(position);
 
-        holder.text_number.setText(String.valueOf(position));
+        holder.text_number.setText(String.valueOf(position + 1));
         holder.text_score.setText(postDTO.getmScore());
         holder.text_title.setText(postDTO.getmTitle());
         holder.text_post_by_url.setText(postDTO.getmURL());

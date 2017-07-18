@@ -8,4 +8,9 @@
 
     <include layout="@layout/home_content" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/testbtn"/>
+
 </android.support.design.widget.CoordinatorLayout>
