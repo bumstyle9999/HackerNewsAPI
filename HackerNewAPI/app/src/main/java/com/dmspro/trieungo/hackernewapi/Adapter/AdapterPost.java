@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.dmspro.trieungo.hackernewapi.DTO.Post;
+import com.dmspro.trieungo.hackernewapi.DTO.PostDTO;
 import com.dmspro.trieungo.hackernewapi.R;
 
 import java.text.SimpleDateFormat;
@@ -22,7 +22,11 @@ import java.util.TimeZone;
 public class AdapterPost extends  RecyclerView.Adapter<AdapterPost.ViewHolder> {
 
     private Context mContext;
-    private List<Post> mListPost;
+    private List<PostDTO> mListPost;
+
+    public AdapterPost(final List<PostDTO> postDTOs) {
+        this.mListPost = postDTOs;
+    }
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -43,9 +47,12 @@ public class AdapterPost extends  RecyclerView.Adapter<AdapterPost.ViewHolder> {
         }
     }
 
+    public List<PostDTO> getItems() {
+        return mListPost;
+    }
 
 
-    public AdapterPost(Context mContext, List<Post> listPost) {
+    public AdapterPost(Context mContext, List<PostDTO> listPost) {
         this.mContext = mContext;
         this.mListPost = listPost;
     }
@@ -60,7 +67,7 @@ public class AdapterPost extends  RecyclerView.Adapter<AdapterPost.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final Post postDTO = mListPost.get(position);
+        final PostDTO postDTO = mListPost.get(position);
 
         holder.text_number.setText(String.valueOf(position + 1));
         holder.text_score.setText(postDTO.getmScore());
